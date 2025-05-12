@@ -15,8 +15,8 @@ import About from '../pages/About';
 import ContactUs from '../pages/ContactUs';
 import NotFound from '../pages/NotFound';
 import Sessions from '../pages/Sessions';
-// import ForgotPassword from '../pages/auth/ForgotPassword'; 
-// import ResetPassword from '../../../ResetPassword'; 
+import ForgotPassword from '../pages/auth/ForgotPassword'; 
+import UpdatePassword from '../pages/auth/UpdatePassword'; 
 
 // Admin sub-route components
 import AdminOverview from '../pages/admin/AdminOverview';
@@ -36,8 +36,8 @@ const AppRoutes = () => {
     >
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
-      {/* <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/reset-password" element={<ResetPassword />} />  */}
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/update-password" element={<UpdatePassword />} />
       <Route path="/register" element={<Register />} />
       <Route path="/about" element={<About />} />
       <Route path="/contactus" element={<ContactUs />} />

@@ -49,8 +49,11 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black bg-no-repeat bg-cover bg-center flex items-center justify-center px-4 sm:px-6 lg:px-8" style={{ backgroundImage: `url(${bg3})` }}>
-      <motion.div 
+    <div
+      className="min-h-screen bg-black bg-no-repeat bg-cover bg-center flex items-center justify-center px-4 sm:px-6 lg:px-8"
+      style={{ backgroundImage: `url(${bg3})` }}
+    >
+      <motion.div
         className="max-w-md w-full bg-white rounded-lg shadow-xl overflow-hidden"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -65,7 +68,7 @@ const Login = () => {
           </div>
 
           {error && (
-            <motion.div 
+            <motion.div
               className="mt-4 bg-red-50 border-l-4 border-red-500 p-4 rounded"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -75,7 +78,7 @@ const Login = () => {
                 <FiAlertCircle className="text-red-500 mr-2" />
                 <p className="text-sm text-red-700">{error}</p>
               </div>
-              <button 
+              <button
                 onClick={() => dispatch(clearError())}
                 className="text-xs text-red-700 underline mt-1"
               >
@@ -97,7 +100,7 @@ const Login = () => {
                   id="email"
                   type="email"
                   autoComplete="email"
-                  {...register('email', { 
+                  {...register('email', {
                     required: 'Email is required',
                     pattern: {
                       value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -125,7 +128,7 @@ const Login = () => {
                   id="password"
                   type="password"
                   autoComplete="current-password"
-                  {...register('password', { 
+                  {...register('password', {
                     required: 'Password is required',
                     minLength: {
                       value: 6,
@@ -141,6 +144,16 @@ const Login = () => {
               )}
             </div>
 
+            {/* Added forgot password link */}
+            <div className="flex justify-end">
+              <Link
+                to="/forgot-password"
+                className="text-sm text-primary-600 hover:text-primary-800 font-medium"
+              >
+                Forgot password?
+              </Link>
+            </div>
+
             <div>
               <button
                 type="submit"
@@ -148,9 +161,25 @@ const Login = () => {
                 className="w-full btn-primary py-3 flex justify-center items-center"
               >
                 {loading ? (
-                  <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  <svg
+                    className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    ></path>
                   </svg>
                 ) : null}
                 {loading ? 'Signing in...' : `Sign in as ${isAdminLogin ? 'Admin' : 'User'}`}
@@ -197,7 +226,10 @@ const Login = () => {
               <div className="mt-6 text-center">
                 <p className="text-sm text-gray-600">
                   Don't have an account?{' '}
-                  <Link to="/register" className="font-medium text-primary-600 hover:text-primary-500">
+                  <Link
+                    to="/register"
+                    className="font-medium text-primary-600 hover:text-primary-500"
+                  >
                     Sign up
                   </Link>
                 </p>
@@ -220,4 +252,3 @@ const Login = () => {
 };
 
 export default Login;
-

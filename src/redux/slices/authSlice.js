@@ -105,22 +105,55 @@ export const googleLogin = createAsyncThunk(
 );
 
 // Logout
-export const logoutUser = createAsyncThunk('auth/logoutUser', async (_, { rejectWithValue }) => {
-  try {
-    const { error } = await supabase.auth.signOut();
-    if (error) return rejectWithValue(error.message);
-    return null;
-  } catch (err) {
-    return rejectWithValue(err.message || 'Logout failed.');
+export const logoutUser = createAsyncThunk(
+  'auth/logoutUser',
+  async (_, { rejectWithValue }) => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) return rejectWithValue(error.message);
+      return null;
+    } catch (err) {
+      return rejectWithValue(err.message || 'Logout failed.');
+    }
   }
-});
+);
+
+// Request password reset
+export const requestPasswordReset = createAsyncThunk(
+  'auth/requestPasswordReset',
+  async (email, { rejectWithValue }) => {
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/update-password`,
+      });
+      if (error) return rejectWithValue(error.message);
+      return { success: true };
+    } catch (err) {
+      return rejectWithValue(err.message || 'Password reset request failed.');
+    }
+  }
+);
+
+// Update password
+export const updatePassword = createAsyncThunk(
+  'auth/updatePassword',
+  async (newPassword, { rejectWithValue }) => {
+    try {
+      const { error } = await supabase.auth.updateUser({ password: newPassword });
+      if (error) return rejectWithValue(error.message);
+      return { success: true };
+    } catch (err) {
+      return rejectWithValue(err.message || 'Password update failed.');
+    }
+  }
+);
 
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
     user: null,
-    isAuthenticated: null, // Use null to indicate unresolved state
-    status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
+    isAuthenticated: null,
+    status: 'idle',
     error: null,
   },
   reducers: {
@@ -189,6 +222,28 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(logoutUser.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      })
+      .addCase(requestPasswordReset.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(requestPasswordReset.fulfilled, (state) => {
+        state.status = 'succeeded';
+      })
+      .addCase(requestPasswordReset.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      })
+      .addCase(updatePassword.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(updatePassword.fulfilled, (state) => {
+        state.status = 'succeeded';
+      })
+      .addCase(updatePassword.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload;
       });
