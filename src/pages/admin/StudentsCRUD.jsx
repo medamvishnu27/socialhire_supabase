@@ -21,35 +21,47 @@ const AllUsersCRUD = () => {
     fetchUsers();
   }, []);
 
-  const fetchUsers = async () => {
-    try {
-      setLoading(true);
-      
-      const { data: { user } } = await supabase.auth.getUser();
-      const userRole = user?.user_metadata?.role || (await supabase.rpc('get_my_claim', { claim: 'role' })).data;
-      
-      if (userRole === 'admin') {
-        const { data, error } = await supabase
-          .from('users')
-          .select('*');
-        
-        if (error) throw error;
-        setUsers(data || []);
-      } else {
-        const { data, error } = await supabase
-          .from('users')
-          .select('*')
-          .eq('id', user.id);
-        
-        if (error) throw error;
-        setUsers(data || []);
-      }
-    } catch (error) {
-      console.error('Error fetching users:', error);
-    } finally {
-      setLoading(false);
+const fetchUsers = async () => {
+  try {
+    setLoading(true);
+
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
+    if (authError || !user) throw authError || new Error("User not found");
+
+    // Fetch the role directly from your users table
+    const { data: profile, error: profileError } = await supabase
+      .from('users')
+      .select('role')
+      .eq('id', user.id)
+      .single();
+
+    if (profileError) throw profileError;
+
+    const userRole = profile?.role?.trim(); // trim in case there's newline or space
+
+    if (userRole === 'admin') {
+      const { data, error } = await supabase
+        .from('users')
+        .select('*');
+
+      if (error) throw error;
+      setUsers(data || []);
+    } else {
+      const { data, error } = await supabase
+        .from('users')
+        .select('*')
+        .eq('id', user.id);
+
+      if (error) throw error;
+      setUsers(data || []);
     }
-  };
+  } catch (error) {
+    console.error('Error fetching users:', error);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   const fetchUserStats = async (userId) => {
     try {
