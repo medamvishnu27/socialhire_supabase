@@ -191,7 +191,7 @@ const Sessions = () => {
 
   const handleJoinSession = (link) => {
     if (link) {
-      window.open(link, '_blank', 'noopener,noreferrer');
+      window.open(link, '_self', 'noopener,noreferrer');
     } else {
       alert('No session link available for this event.');
     }

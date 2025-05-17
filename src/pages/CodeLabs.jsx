@@ -79,7 +79,7 @@ const TechnologyCard = ({ tech, activeCardId, setActiveCardId }) => {
           >
             <a
               href="https://labs.socialhire.in/register"
-              target="_blank"
+              target="_self"
               rel="noopener noreferrer"
               className="bg-primary-600 text-white px-6 py-2 rounded-full font-medium hover:bg-primary-700 transition-colors duration-200"
               onClick={(e) => e.stopPropagation()} // Prevent tap on button from toggling card
@@ -488,7 +488,7 @@ const CodeLabs = () => {
         <div className="mt-12 text-center">
           <a
             href="https://labs.socialhire.in/register"
-            target="_blank"
+            target="_self"
             rel="noopener noreferrer"
             className="inline-block bg-primary-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-primary-700 transition-colors duration-200"
           >

@@ -577,7 +577,7 @@ const Jobs = () => {
                                 No specific skills identified. Explore our{' '}
                                 <a
                                   href={defaultCourseLink}
-                                  target="_blank"
+                                  target="_self"
                                   rel="noopener noreferrer"
                                   className="inline-block text-blue-600 underline hover:bg-blue-50 hover:border hover:border-blue-600 hover:rounded-full hover:no-underline hover:shadow-sm transition-all duration-200"
                                   style={{ width: 'fit-content' }}
@@ -594,7 +594,7 @@ const Jobs = () => {
                                 <a
                                   key={index}
                                   href={getCourseUrl(skill)}
-                                  target="_blank"
+                                  target="_self"
                                   rel="noopener noreferrer"
                                   className="inline-block text-blue-600 hover:bg-blue-50 hover:border hover:border-blue-600 hover:rounded-full hover:no-underline hover:shadow-sm hover:px-2 hover:py-1 transition-all duration-200"
                                   style={{ width: 'fit-content' }}
@@ -611,7 +611,7 @@ const Jobs = () => {
                       {selectedJob.application_url ? (
                         <a
                           href={selectedJob.application_url}
-                          target="_blank"
+                          target="_self"
                           rel="noopener noreferrer"
                           className="btn-primary px-4 py-2 bg-primary-500 text-white font-semibold 
                  flex items-center justify-center gap-2 rounded-lg 

@@ -89,7 +89,7 @@ const ResumeBuilder = () => {
         >
           <a
             href="https://socialhire.in/resume-checker/"
-            target="_blank"
+            target="_self"
             rel="noopener noreferrer"
             className="inline-block bg-white text-gray-900 px-8 py-3 rounded-full font-medium text-lg hover:bg-opacity-90 transition-colors duration-200 transform hover:scale-105"
           >
