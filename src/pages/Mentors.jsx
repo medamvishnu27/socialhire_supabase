@@ -44,7 +44,7 @@ const Mentors = () => {
     if (mentor.topmate) {
       const link = document.createElement('a');
       link.href = mentor.topmate;
-      link.target = '_self';
+      link.target = '_blank';
       link.rel = 'noopener noreferrer';
       document.body.appendChild(link);
       link.click();
