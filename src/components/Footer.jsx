@@ -105,7 +105,7 @@ const Footer = () => {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    target="_blank"
+                    target="_self"
                     rel="noopener noreferrer"
                     className="text-base text-gray-100 hover:text-primary-600 flex items-center"
                   >
@@ -128,7 +128,7 @@ const Footer = () => {
                 <a
                   key={link.label}
                   href={link.href}
-                  target="_blank"
+                  target="_self"
                   rel="noopener noreferrer"
                   className="text-gray-100 hover:text-primary-600"
                 >
